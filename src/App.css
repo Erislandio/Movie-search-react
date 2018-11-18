@@ -12,7 +12,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, input {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -44,4 +44,45 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+/* todo Input */
+
+span.input-content {
+    position: relative;
+    width: 100%;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #dedede;
+	padding: 0px 10px;
+}
+
+span.input-content input {
+	font-size: 20px;
+	width: 100%;
+	padding: 5px 10px;
+}
+
+span.input-content button {
+	background: transparent;
+	border: none;
+	font-size: 20px;
+	color: #01d277;
+}
+
+
+/* ! main */
+
+main.main {
+    margin-top: 25px;
+    padding: 0px 20px 20px;
+}
+
+main.main img {
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-o-border-radius: 6px;
+	border: 1px solid #dedede;
 }
