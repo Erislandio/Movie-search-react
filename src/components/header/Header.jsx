@@ -19,6 +19,10 @@ class Header extends Component {
         this.setState({ open: !this.state.open })
     }
 
+    openLink(){
+        window.location.href = 'https://www.themoviedb.org/?language=pt-BR'
+    }
+
 
     render() {
         console.log(this)
@@ -26,7 +30,7 @@ class Header extends Component {
             <React.Fragment>
                 <header className={(this.state.open ? ' fixed ' : ' ') + ' header '}>
                     <IconBar open={this.openSide} change={this.state.open} />
-                    <div className="logo">
+                    <div className="logo" onClick={this.openLink.bind(this)}> 
                         <img src={logo} alt="logo" />
                     </div>
                 </header>

@@ -7,7 +7,9 @@ class SideBar extends Component {
 
     }
 
-
+    openLink(){
+        window.location.href = 'https://github.com/Erislandio/Movie-search-react'
+    }
 
     render() {
         return (
@@ -17,6 +19,12 @@ class SideBar extends Component {
                         <li>
                             MovieDb Search
                             <p>Procure por filmes, series, animes ...</p>
+                        </li>
+                        <li>
+                            <a className="link-to-code " onClick={this.openLink.bind(this)}>
+                                veja o codigo completo aqui...
+                                <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="code" />
+                            </a>
                         </li>
                     </ul>
                 </nav>
