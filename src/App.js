@@ -4,13 +4,16 @@ import MovieRow from './components/MovieRow'
 import $ from 'jquery'
 import Header from './components/header/Header';
 import Loader from './components/loader/Loader';
+import Footer from './components/footer/Footer';
+import EmptySearch from './components/empety/EmptySearch';
 
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      loading: true
+      loading: true,
+      text: ''
     }
     this.performSearch("avengers")
   }
@@ -45,6 +48,7 @@ class App extends Component {
     const boundObject = this
     const searchTerm = event.target.value
     boundObject.performSearch(searchTerm)
+    this.setState({ text: searchTerm })
   }
 
   componentDidMount() {
@@ -52,9 +56,11 @@ class App extends Component {
   }
 
   render() {
-    if(this.state.loading === true){
+    if (this.state.loading === true) {
       return <Loader />
     }
+
+    console.log(this)
     return (
       <div className="app">
         <Header />
@@ -67,8 +73,11 @@ class App extends Component {
         }} onChange={this.searchChangeHandler.bind(this)} placeholder="Procurar..." />
         <div className="content-form">
           {this.state.rows}
+          {
+            this.state.rows == false && <EmptySearch erro={this.state.text} />
+          }
         </div>
-
+        <Footer />
       </div>
     );
   }
