@@ -6,8 +6,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
-    background: #000;
+    padding: 10px;
+    background: #2c3e50;
+    z-index: 9999999;
 }
 
 .header-text{
@@ -15,5 +16,9 @@
     font-weight: bold;
     font-size: 28px;
     display: block;
+}
+
+.fixed {
+    position: fixed;
 }
 

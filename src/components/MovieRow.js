@@ -1,4 +1,5 @@
 import React from 'react'
+import Modal from './Modal';
 
 class MovieRow extends React.Component {
     viewMovie() {
@@ -8,11 +9,26 @@ class MovieRow extends React.Component {
         window.location.href = url
     }
 
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            open: false
+        }
+
+        this.openModal = this.openModal.bind(this)
+    }
+
+    openModal(){
+        this.setState({open: !this.state.open})
+    }
+    
+
     render() {
         return (
 
             <div key={this.props.key} className="content-search">
-                <div className="film-image">
+                <div className="film-image" onClick={this.openModal.bind(this)}>
                     <img src={this.props.movie.poster_src} />
                 </div>
                 <div className="movie-desc">
@@ -31,6 +47,7 @@ class MovieRow extends React.Component {
                         View
                     </button>
                 </div>
+                <Modal image={this.props.movie.poster_src} title={this.props.movie.title} open={this.state.open} closeModal={this.openModal}/>
             </div>
 
         );
