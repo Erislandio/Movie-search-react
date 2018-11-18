@@ -2,7 +2,13 @@ import React from 'react'
 import Modal from './Modal';
 import Loader from './loader/Loader';
 
+import share from '../icons/Share.svg'
+import heart from '../icons/heart.svg'
+import SvgHeart from '../icons/heart'
+
+
 class MovieRow extends React.Component {
+
     viewMovie() {
         // console.log("Trying to view movie")
         // console.log(this.props.movie.title)
@@ -15,7 +21,8 @@ class MovieRow extends React.Component {
 
         this.state = {
             open: false,
-            loading: true
+            loading: true,
+            fav: false
         }
 
         this.openModal = this.openModal.bind(this)
@@ -27,6 +34,14 @@ class MovieRow extends React.Component {
 
     componentDidMount() {
         this.setState({ loading: false })
+    }
+
+    addFav(){
+        this.setState({fav: !this.state.fav})
+    }
+
+    share(){
+        alert('Indisponivel no momento')
     }
 
     render() {
@@ -58,6 +73,16 @@ class MovieRow extends React.Component {
                     <button className="link" onClick={this.viewMovie.bind(this)}>
                         View
                     </button>
+                    <div className="share">
+                        <ul>
+                            <li onClick={this.share.bind(this)}>
+                                <img src={share} />
+                            </li>
+                            <li className={(this.state.fav ? ' fav ' : ' ')} onClick={this.addFav.bind(this)}>
+                                <SvgHeart />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <Modal image={this.props.movie.poster_src} title={this.props.movie.title} open={this.state.open} closeModal={this.openModal} />
             </div>)

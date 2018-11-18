@@ -6,6 +6,7 @@ import Header from './components/header/Header';
 import Loader from './components/loader/Loader';
 import Footer from './components/footer/Footer';
 import EmptySearch from './components/empety/EmptySearch';
+import arrowUp from './icons/ArrowUp.svg'
 
 class App extends Component {
 
@@ -13,9 +14,11 @@ class App extends Component {
     super(props)
     this.state = {
       loading: true,
-      text: ''
+      text: '',
+      toTop: false
     }
     this.performSearch("avengers")
+    this.toTop()
   }
 
   performSearch(searchTerm) {
@@ -55,6 +58,20 @@ class App extends Component {
     this.setState({ loading: false })
   }
 
+  toTop(){
+    window.onscroll = () => {
+      if(window.pageYOffset > 300) {
+        this.setState({toTop: true})
+      } if (window.pageYOffset === 0) {
+        this.setState({toTop: false})
+      }
+    };
+  }
+
+  ScrollToTop(){
+    window.scroll(0, 0)
+  }
+
   render() {
     if (this.state.loading === true) {
       return <Loader />
@@ -76,6 +93,9 @@ class App extends Component {
           {
             this.state.rows == false && <EmptySearch erro={this.state.text} />
           }
+        </div>
+        <div className={(this.state.toTop ? ' active ' : ' ' ) + ' toTop '} onClick={this.ScrollToTop.bind(this)}>
+          <img src={arrowUp} />
         </div>
         <Footer />
       </div>
