@@ -44,4 +44,6 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 
-[Link de acesso a api](https://developers.themoviedb.org/3/search/search-movies)
+[Link de acesso a api](3)
+
+https://api.themoviedb.org/3/search/movie?query=${this.state.search}l&api_key=1b5adf76a72a13bad99b8fc0c68cb085

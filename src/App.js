@@ -1,63 +1,64 @@
 import React, { Component } from 'react';
 import './App.css';
+import MovieRow from './components/MovieRow'
+import $ from 'jquery'
 import Header from './components/header/Header';
-import 'font-awesome/css/font-awesome.min.css'
 
 class App extends Component {
 
   constructor(props) {
-    super(props);
-
-    const movies = [
-      {
-        id: 0,
-        title: 'Filme teste',
-        overview: 'Teste teste teste'
-      },
-      {
-        id: 1,
-        title: 'Filme teste 2',
-        overview: 'Teste2 teste2 teste'
-      }
-    ]
-
-    let movieRows = []
-
-    movies.map(movie => {
-      console.log(movie.id)
-      const movieRow = <table key={movie.id}>
-        <tr>
-          <td>
-            <img width="125px" src="https://filmspot.com.pt/images/filmes/posters/big/446354_pt.jpg" alt="poster" />
-          </td>
-          <td>
-            {movie.title}
-          </td>
-        </tr>
-      </table>
-      movieRows.push(movieRow)
-    })
-
-    this.state = {
-      rows: movieRows
-    }
-
+    super(props)
+    this.state = {}
+    this.performSearch("ant man")
   }
 
+  performSearch(searchTerm) {
+    console.log("Perform search using moviedb")
+    const urlString = `https://api.themoviedb.org/3/search/movie?api_key=1b5adf76a72a13bad99b8fc0c68cb085&query=${searchTerm}`
+    $.ajax({
+      url: urlString,
+      success: (searchResults) => {
+        const results = searchResults.results
+        console.log(results)
+        var movieRows = []
+
+        results.map(movie => {
+          movie.poster_src = `https://image.tmdb.org/t/p/w185${movie.poster_path}`
+          console.log(movie.poster_path)
+          const movieRow = <MovieRow key={movie.id} movie={movie} />
+          movieRows.push(movieRow)
+        })
+
+        this.setState({ rows: movieRows })
+      },
+      error: (xhr, status, err) => {
+        console.error("Failed to fetch data")
+      }
+    })
+  }
+
+  searchChangeHandler(event) {
+    console.log(event.target.value)
+    const boundObject = this
+    const searchTerm = event.target.value
+    boundObject.performSearch(searchTerm)
+  }
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <Header />
-        <span className="input-content">
-          <input placeholder="Procurar..." />
-          <button type="button">
-            <i className="fa fa-search"></i>
-          </button>
-        </span>
-        <main className="main">
+        <input  className="input-search" style={{
+          fontSize: 24,
+          display: 'block',
+          paddingTop: 8,
+          paddingBottom: 8,
+          paddingLeft: 16
+        }} onChange={this.searchChangeHandler.bind(this)} placeholder="Procurar..." />
+        <div className="content-form">
           {this.state.rows}
-        </main>
+        </div>
+
       </div>
     );
   }
