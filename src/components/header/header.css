@@ -1,0 +1,17 @@
+/* !Header */
+
+.header {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: #000;
+}
+
+.header-text{
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 28px;
+}
