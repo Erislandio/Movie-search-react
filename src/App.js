@@ -3,13 +3,16 @@ import './App.css';
 import MovieRow from './components/MovieRow'
 import $ from 'jquery'
 import Header from './components/header/Header';
+import Loader from './components/loader/Loader';
 
 class App extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
-    this.performSearch("ant man")
+    this.state = {
+      loading: true
+    }
+    this.performSearch("avengers")
   }
 
   performSearch(searchTerm) {
@@ -32,7 +35,7 @@ class App extends Component {
         this.setState({ rows: movieRows })
       },
       error: (xhr, status, err) => {
-        console.error("Failed to fetch data")
+        console.error("erro!!", err)
       }
     })
   }
@@ -44,14 +47,21 @@ class App extends Component {
     boundObject.performSearch(searchTerm)
   }
 
+  componentDidMount() {
+    this.setState({ loading: false })
+  }
+
   render() {
+    if(this.state.loading === true){
+      return <Loader />
+    }
     return (
       <div className="app">
         <Header />
-        <input  className="input-search" style={{
+        <input className="input-search" style={{
           fontSize: 24,
           display: 'block',
-          paddingTop: 8,
+          paddingTop: 75,
           paddingBottom: 8,
           paddingLeft: 16
         }} onChange={this.searchChangeHandler.bind(this)} placeholder="Procurar..." />

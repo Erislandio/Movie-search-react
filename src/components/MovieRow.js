@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from './Modal';
+import Loader from './loader/Loader';
 
 class MovieRow extends React.Component {
     viewMovie() {
@@ -11,23 +12,34 @@ class MovieRow extends React.Component {
 
     constructor(props) {
         super(props);
-        
+
         this.state = {
-            open: false
+            open: false,
+            loading: true
         }
 
         this.openModal = this.openModal.bind(this)
     }
 
-    openModal(){
-        this.setState({open: !this.state.open})
+    openModal() {
+        this.setState({ open: !this.state.open })
     }
-    
+
+    componentDidMount() {
+        this.setState({ loading: false })
+    }
 
     render() {
-        return (
 
-            <div key={this.props.key} className="content-search">
+        if(this.state.loading === true){
+            return (
+                <Loader />
+            );
+        }
+
+        return (
+            
+            (<div key={this.props.key} className="content-search">
                 <div className="film-image" onClick={this.openModal.bind(this)}>
                     <img src={this.props.movie.poster_src} />
                 </div>
@@ -47,8 +59,8 @@ class MovieRow extends React.Component {
                         View
                     </button>
                 </div>
-                <Modal image={this.props.movie.poster_src} title={this.props.movie.title} open={this.state.open} closeModal={this.openModal}/>
-            </div>
+                <Modal image={this.props.movie.poster_src} title={this.props.movie.title} open={this.state.open} closeModal={this.openModal} />
+            </div>)
 
         );
     }

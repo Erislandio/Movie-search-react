@@ -6,9 +6,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 5px 10px; 
     background: rgba(8,28,36,0.95);
     z-index: 9999999;
+    position: fixed;
 }
 
 .header-text{
@@ -20,5 +21,9 @@
 
 .fixed {
     position: fixed;
+}
+
+.logo img {
+    width: 55px;
 }
 
